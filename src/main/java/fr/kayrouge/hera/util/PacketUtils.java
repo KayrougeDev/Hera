@@ -1,6 +1,5 @@
-package fr.kayrouge.hera;
+package fr.kayrouge.hera.util;
 
-import com.google.common.io.ByteArrayDataOutput;
 import org.jspecify.annotations.Nullable;
 
 import java.io.DataInputStream;

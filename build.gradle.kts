@@ -7,7 +7,7 @@ plugins {
 
 
 group = "fr.kayrouge"
-version = "4"
+version = "5"
 
 repositories {
     mavenCentral()
