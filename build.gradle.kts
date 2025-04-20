@@ -7,7 +7,7 @@ plugins {
 
 
 group = "fr.kayrouge"
-version = "5"
+version = "6"
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ repositories {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(16))
     }
 }
 
