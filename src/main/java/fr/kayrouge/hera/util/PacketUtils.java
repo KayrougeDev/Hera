@@ -18,48 +18,55 @@ public class PacketUtils {
     public static final byte TYPE_BYTE = 7;
 
     public static void writeObject(DataOutputStream out, Object obj) throws IOException {
-        if(Objects.isNull(obj)) {
+        if (obj == null) {
             out.writeByte(TYPE_NULL);
-        }
-        else if (obj instanceof String s) {
+        } else if (obj instanceof String) {
             out.writeByte(TYPE_STRING);
-            out.writeUTF(s);
-        } else if (obj instanceof Integer i) {
+            out.writeUTF((String) obj);
+        } else if (obj instanceof Integer) {
             out.writeByte(TYPE_INT);
-            out.writeInt(i);
-        } else if (obj instanceof Boolean b) {
+            out.writeInt((Integer) obj);
+        } else if (obj instanceof Boolean) {
             out.writeByte(TYPE_BOOLEAN);
-            out.writeBoolean(b);
-        } else if (obj instanceof Double d) {
+            out.writeBoolean((Boolean) obj);
+        } else if (obj instanceof Double) {
             out.writeByte(TYPE_DOUBLE);
-            out.writeDouble(d);
-        } else if (obj instanceof Float f) {
+            out.writeDouble((Double) obj);
+        } else if (obj instanceof Float) {
             out.writeByte(TYPE_FLOAT);
-            out.writeFloat(f);
-        } else if (obj instanceof Long l) {
+            out.writeFloat((Float) obj);
+        } else if (obj instanceof Long) {
             out.writeByte(TYPE_LONG);
-            out.writeLong(l);
-        } else if (obj instanceof Byte b) {
+            out.writeLong((Long) obj);
+        } else if (obj instanceof Byte) {
             out.writeByte(TYPE_BYTE);
-            out.writeByte(b);
+            out.writeByte((Byte) obj);
         } else {
             throw new IllegalArgumentException("Unsupported object type: " + obj.getClass());
         }
     }
 
-    @Nullable
     public static Object readObject(DataInputStream in) throws IOException {
         byte type = in.readByte();
-        return switch (type) {
-            case PacketUtils.TYPE_NULL -> null;
-            case PacketUtils.TYPE_STRING -> in.readUTF();
-            case PacketUtils.TYPE_INT -> in.readInt();
-            case PacketUtils.TYPE_BOOLEAN -> in.readBoolean();
-            case PacketUtils.TYPE_DOUBLE -> in.readDouble();
-            case PacketUtils.TYPE_FLOAT -> in.readFloat();
-            case PacketUtils.TYPE_LONG -> in.readLong();
-            case PacketUtils.TYPE_BYTE -> in.readByte();
-            default -> throw new IOException("Unknown data type ID: " + type);
-        };
+        switch (type) {
+            case TYPE_NULL:
+                return null;
+            case TYPE_STRING:
+                return in.readUTF();
+            case TYPE_INT:
+                return in.readInt();
+            case TYPE_BOOLEAN:
+                return in.readBoolean();
+            case TYPE_DOUBLE:
+                return in.readDouble();
+            case TYPE_FLOAT:
+                return in.readFloat();
+            case TYPE_LONG:
+                return in.readLong();
+            case TYPE_BYTE:
+                return in.readByte();
+            default:
+                throw new IOException("Unknown data type ID: " + type);
+        }
     }
 }
